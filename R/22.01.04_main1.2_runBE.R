@@ -4,7 +4,7 @@
 #'
 #' The BE algorithm was originally proposed by Buja and Eyuboglu (1992). A detailed description of this method can be found in preprint. For reproducibility, make sure to change the RNG type (necessary unless \code{mc.cores} is 1) and set the seed before using this function (see README file for details).
 #'
-#' @param X The data matrix (must be observation by feature).
+#' @param X The data matrix for running PCA (must be observation by feature).
 #' @param B The number of permutations.
 #' @param alpha The significance level.
 #' @param mc.cores The number of cores used for parallel computing.

@@ -15,9 +15,9 @@ makeScreePlot(
 )
 }
 \arguments{
-\item{prcompResult}{The output from running \code{prcomp()}.}
+\item{prcompResult}{The output from \code{prcomp()}.}
 
-\item{labels}{A string or vector of strings that will be used as the label(s) of the numbers of PCs in \code{values}.}
+\item{labels}{A string or vector of strings to be used as the label(s) of the numbers of PCs in \code{values}.}
 
 \item{values}{An integer or vector of integers representing the numbers of PCs chosen via different methods. \code{labels} and \code{values} must be nonempty, and the entries must match between the two vectors.}
 

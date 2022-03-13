@@ -1,31 +1,17 @@
+PCA for hidden variable inference in QTL mapping
+================
 
-We have shown that PCA outperforms popular hidden variable inference
-methods for QTL mapping (including SVA, PEER, and HCP) while being
-faster and more interpretable (preprint). In particular, compared to
-PEER, the most popular hidden variable inference method for QTL mapping
-currently, PCA performs better, is orders of magnitude faster and much
-easier to use and interpret, and offers convenient ways of choosing *K*
-such as the elbow method and the Buja and Eyuboglu (BE) algorithm (1992)
-(both of which we implement here in this package). In contrast, users of
-PEER need to rely on the claim that the performance of PEER does not
-deteriorate as *K* increases (2010, 2012) (which we have shown to be a
-generally invalid claim) and often end up having to choose *K* by
-maximizing the number of discoveries; not only is this approach of
-choosing *K* extremely computationally expensive and theoretically
-unsound, we have also shown empirical evidence that it may yield
-inappropriate choices of *K* (preprint). All in all, evidence suggests
-that PCA should be the go-to hidden variable inference method for QTL
-mapping.
-
-Here we aim to provide some guidance on **how to use PCA** for hidden
-variable inference in QTL mapping and in particular **how to choose
-*K*** using the functions provided in this package. This package
-implements two simple, highly interpretable methods for choosing the
-number of PCs: an **automatic elbow detection method** (based on
-distance to the diagonal line) and the **BE algorithm** (a
-permutation-based approach) (see preprint for detailed descriptions of
-both methods). We decided to implement these methods ourselves after
-failing to find existing software packages that implement them well.
+We have shown that PCA is faster, better-performing, and much easier to
+interpret and use than popular hidden variable inference methods for QTL
+mapping including SVA, PEER, and HCP (2022). Here we aim to provide some
+guidance on **how to use PCA** for hidden variable inference in QTL
+mapping and in particular **how to choose *K*** using the functions
+provided in this package. This package implements two simple, highly
+interpretable methods for choosing the number of PCs: an **automatic
+elbow detection method** (based on distance to the diagonal line) and
+the **Buja and Eyuboglu (BE) algorithm** (1992) (a permutation-based
+approach). Detailed descriptions of both methods can be found in our
+paper (2022).
 
 ## 1. Installation
 
@@ -38,13 +24,14 @@ devtools::install_github("heatherjzhou/PCAForQTL")
 
 We start with the **fully processed** molecular phenotype matrix. In
 this tutorial, we use the fully processed gene expression matrix for
-colon (transverse) from GTEx V8 (2020) as an example. This gene
-expression matrix has been fully processed—TPM normalized, filtered, TMM
-normalized, and inverse normal transformed (see
-[link](https://gtexportal.org/home/documentationPage)). It can be
-obtained directly from [link](https://gtexportal.org/home/datasets) and
-is also made available under the folder named Example_Data in this
-repository (in a format that can be easily read into R).
+Colon - Transverse from GTEx V8 (2020) as an example. In GTEx’s case,
+“fully processed” means TPM normalized, filtered, TMM normalized, and
+inverse normal transformed (see
+[link](https://gtexportal.org/home/documentationPage); depending on your
+specific situation, your procedure may be different). The data set can
+be obtained directly from [link](https://gtexportal.org/home/datasets)
+and is also made available under the folder named Example_Data in this
+repository in a format that can be easily read into R.
 
 First, download the example data set and load it into the environment
 (change the path as necessary on your device).
@@ -76,12 +63,12 @@ PCs<-prcompResult$x #368*368. The columns are PCs.
 ```
 
 Note that the approach we use in this tutorial constitutes PCA_direct
-rather than PCA_resid (preprint). The two approaches perform similarly
-in our simulation studies, so we choose PCA_direct because it is
-simpler. In addition, PCA_direct can better hedge against the
-possibility that the known covariates are not actually important batch
-effects (because in PCA_direct, the known covariates do not affect the
-calculation of the PCs).
+rather than PCA_resid (2022). The two approaches perform similarly in
+our simulation studies, so we choose PCA_direct because it is simpler.
+In addition, PCA_direct can better hedge against the possibility that
+the known covariates are not actually important confounders because in
+PCA_direct, the known covariates do not affect the calculation of the
+PCs.
 
 Optionally, you may inspect the proportion of variance explained by the
 PCs at this point. We omit this here because we will perform a more
@@ -146,7 +133,7 @@ print(resultRunBE$numOfPCsChosen)
 Windows users:
 
 ``` r
-set.seed(1) #No need to change the RNG type since mc.cores will be 1.
+set.seed(1) #No need to change the RNG type since mc.cores will need to be 1.
 resultRunBE<-PCAForQTL::runBE(expr,B=20,alpha=0.05,
                               mc.cores=1)
 print(resultRunBE$numOfPCsChosen)
@@ -167,9 +154,9 @@ PCAForQTL::makeScreePlot(prcompResult,labels=c("Elbow","BE","GTEx"),values=c(K_e
 
 ![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
-Using code similar to below, we may save the plot for each tissue type
-in order to compare across all tissue types before making a final
-decision on how to choose *K*.
+Lastly, we recommend saving the plot for each tissue type (using code
+similar to below) in order to **compare across all tissue types** before
+making a final decision on how to choose *K*.
 
 ``` r
 ggplot2::ggsave("./Colon_Transverse.jpg",width=16,height=11,unit="cm")
@@ -185,7 +172,7 @@ X), WGS library construction protocol (PCR-based or PCR-free), and donor
 sex. Similar to the gene expression matrix, these variables can be
 obtained directly from [link](https://gtexportal.org/home/datasets) and
 are also made available under the folder named Example_Data in this
-repository (in a format that can be easily read into R).
+repository in a format that can be easily read into R.
 
 First, download the covariates and load them into the environment
 (change the path as necessary on your device). Make sure that the known
@@ -214,7 +201,7 @@ automatic elbow detection method for our example data.
 PCsTop<-PCs[,1:K_elbow] #368*12.
 ```
 
-Now we may use `filterKnownCovariates()` to **filter out the known
+Now we use `filterKnownCovariates()` to **filter out the known
 covariates that are captured well by the top PCs** (unadjusted
 *R*<sup>2</sup> ≥ 0.9 by default). This function returns the known
 covariates that should be kept. We use unadjusted *R*<sup>2</sup>
@@ -226,12 +213,11 @@ argument `unadjustedR2_cutoff`.
 knownCovariatesFiltered<-PCAForQTL::filterKnownCovariates(knownCovariates,PCsTop,unadjustedR2_cutoff=0.9)
 ```
 
-Finally, we may combine the remaining known covariates and the top PCs
-and use them as covariates in the QTL analysis. To avoid potential
-numerical inaccuracies in the QTL analysis, we may optionally scale the
-PCs to unit variance (though theoretically this would not change the QTL
-result from regression-based approaches such as FastQTL and Matrix
-eQTL).
+Finally, we combine the remaining known covariates and the top PCs and
+use them as covariates in the QTL analysis. To avoid potential numerical
+inaccuracies in the QTL analysis, you may optionally scale the PCs to
+unit variance, though theoretically this would not change the QTL result
+from regression-based methods such as Matrix eQTL and FastQTL.
 
 ``` r
 PCsTop<-scale(PCsTop) #Optional. Could be helpful for avoiding numerical inaccuracies.
@@ -240,9 +226,9 @@ covariatesToUse<-cbind(knownCovariatesFiltered,PCsTop)
 
 ## Citation
 
-To acknowledge this package or this tutorial, please cite preprint. For
-questions, please feel free to email us (contact information can be
-found on preprint).
+To acknowledge this package or this tutorial, please cite our preprint
+(2022). For questions, please email us at <lijy03@g.ucla.edu> or
+<heatherjzhou@ucla.edu>.
 
 <!-- [-@stegleBayesianFrameworkAccount2010]. -->
 
@@ -285,6 +271,14 @@ Springer.
 Leek, Jefferey T., and John D. Storey. 2008. “A General Framework for
 Multiple Testing Dependence.” *Proceedings of the National Academy of
 Sciences* 105 (48): 18718–23.
+
+</div>
+
+<div id="ref-leekCapturingHeterogeneityGene2007" class="csl-entry">
+
+Leek, Jeffrey T., and John D. Storey. 2007. “Capturing Heterogeneity in
+Gene Expression Studies by Surrogate Variable Analysis.” *PLoS Genetics*
+3 (9): e161.
 
 </div>
 
@@ -332,6 +326,14 @@ Stegle, Oliver, Leopold Parts, Matias Piipari, John Winn, and Richard
 Durbin. 2012. “Using Probabilistic Estimation of Expression Residuals
 (PEER) to Obtain Increased Power and Interpretability of Gene Expression
 Analyses.” *Nature Protocols* 7 (3): 500–507.
+
+</div>
+
+<div id="ref-zhouPCAOutperformsPopular2022" class="csl-entry">
+
+Zhou, Heather J., Lei Li, Yumei Li, Wei Li, and Jingyi Jessica Li. 2022.
+“PCA Outperforms Popular Hidden Variable Inference Methods for QTL
+Mapping.” *bioRxiv*, https://doi.org/10.1101/2022.03.09.483661.
 
 </div>
 

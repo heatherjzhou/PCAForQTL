@@ -7,7 +7,7 @@
 runElbow(X = NULL, prcompResult = NULL)
 }
 \arguments{
-\item{X}{The data matrix (must be observation by feature).}
+\item{X}{The data matrix for running PCA (must be observation by feature).}
 
 \item{prcompResult}{The output from running \code{prcomp()} on \code{X}. Either \code{X} or \code{prcompResult} must be provided. If both are provided, then only \code{prcompResult} will be used. We recommend only providing \code{prcompResult} because it's faster.}
 }

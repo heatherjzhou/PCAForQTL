@@ -13,7 +13,7 @@ runBE(
 )
 }
 \arguments{
-\item{X}{The data matrix (must be observation by feature).}
+\item{X}{The data matrix for running PCA (must be observation by feature).}
 
 \item{B}{The number of permutations.}
 

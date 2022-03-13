@@ -4,7 +4,7 @@
 #'
 #' A detailed description of this method can be found in preprint.
 #'
-#' @param X The data matrix (must be observation by feature).
+#' @param X The data matrix for running PCA (must be observation by feature).
 #' @param prcompResult The output from running \code{prcomp()} on \code{X}. Either \code{X} or \code{prcompResult} must be provided. If both are provided, then only \code{prcompResult} will be used. We recommend only providing \code{prcompResult} because it's faster.
 #'
 #' @return This function returns the number of PCs selected by maximizing the distance to the diagonal line.

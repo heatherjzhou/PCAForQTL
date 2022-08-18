@@ -5,13 +5,13 @@ We have shown that PCA is faster, better-performing, and much easier to
 interpret and use than popular hidden variable inference methods for QTL
 mapping including SVA, PEER, and HCP (2022). Here we aim to provide some
 guidance on **how to use PCA** for hidden variable inference in QTL
-mapping and in particular **how to choose *K*** using the functions
-provided in this package. This package implements two simple, highly
-interpretable methods for choosing the number of PCs: an **automatic
-elbow detection method** (based on distance to the diagonal line) and
-the **Buja and Eyuboglu (BE) algorithm** (1992) (a permutation-based
-approach). Detailed descriptions of both methods can be found in our
-paper (2022).
+mapping and in particular **how to choose *K*** (the number of PCs)
+using the functions provided in this package. This package implements
+two simple, highly interpretable methods for choosing the number of PCs:
+an **automatic elbow detection method** (based on distance to the
+diagonal line) and the **Buja and Eyuboglu (BE) algorithm** (1992) (a
+permutation-based approach). Detailed descriptions of both methods can
+be found in our paper (2022).
 
 ## 1. Installation
 
@@ -77,6 +77,7 @@ thorough analysis in the next section.
 ``` r
 # importanceTable<-summary(prcompResult)$importance
 # PVEs<-importanceTable[2,]
+# sum(PVEs) #Theoretically, this should be 1.
 # plot(PVEs,xlab="PC index",ylab="PVE")
 ```
 
@@ -154,25 +155,31 @@ PCAForQTL::makeScreePlot(prcompResult,labels=c("Elbow","BE","GTEx"),values=c(K_e
 
 ![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
-Lastly, we recommend saving the plot for each tissue type (using code
-similar to below) in order to **compare across all tissue types** before
-making a final decision on how to choose *K*.
+We recommend saving the plot for each tissue type (using code similar to
+below) in order to **compare across all tissue types** before making a
+final decision on how to choose *K*.
 
 ``` r
 ggplot2::ggsave("./Colon_Transverse.jpg",width=16,height=11,unit="cm")
 ```
 
+Optionally, you may run your entire pipeline using a few different
+choices of *K* (for example, 0, the number of PCs chosen via
+`runElbow()`, and the number of PCs chosen via `runBE()`) and visualize
+the number of discoveries versus *K* before making a final decision on
+how to choose *K* (2017).
+
 ## 4. Using PCs in your QTL analysis
 
-Last but not least, it is good practice to filter out the known
-covariates that are captured well by the inferred covariates (PCs) in
-order to avoid redundancy. GTEx V8 (2020) uses eight known covariates:
-the top five genotype PCs, WGS sequencing platform (HiSeq 2000 or HiSeq
-X), WGS library construction protocol (PCR-based or PCR-free), and donor
-sex. Similar to the gene expression matrix, these variables can be
-obtained directly from [link](https://gtexportal.org/home/datasets) and
-are also made available under the folder named Example_Data in this
-repository in a format that can be easily read into R.
+Lastly, it is good practice to filter out the known covariates that are
+captured well by the inferred covariates (PCs) in order to avoid
+redundancy. GTEx V8 (2020) uses eight known covariates: the top five
+genotype PCs, WGS sequencing platform (HiSeq 2000 or HiSeq X), WGS
+library construction protocol (PCR-based or PCR-free), and donor sex.
+Similar to the gene expression matrix, these variables can be obtained
+directly from [link](https://gtexportal.org/home/datasets) and are also
+made available under the folder named Example_Data in this repository in
+a format that can be easily read into R.
 
 First, download the covariates and load them into the environment
 (change the path as necessary on your device). Make sure that the known
@@ -194,11 +201,11 @@ identical(rownames(knownCovariates),rownames(expr)) #TRUE is good.
 colnames(knownCovariates)[1:5]<-paste0("genotypePC",1:5) #This is to avoid potential confusion.
 ```
 
-Suppose we have decided to use the number of PCs chosen via the
-automatic elbow detection method for our example data.
+Suppose we have decided to use the number of PCs chosen via BE for our
+example data.
 
 ``` r
-PCsTop<-PCs[,1:K_elbow] #368*12.
+PCsTop<-PCs[,1:K_BE] #368*29.
 ```
 
 Now we use `filterKnownCovariates()` to **filter out the known
@@ -243,10 +250,17 @@ Analysis.” *Multivariate Behavioral Research* 27 (4): 509–40.
 
 </div>
 
+<div id="ref-gtexconsortiumGeneticEffectsGene2017" class="csl-entry">
+
+GTEx Consortium. 2017. “Genetic Effects on Gene Expression Across Human
+Tissues.” *Nature* 550 (7675): 204–13.
+
+</div>
+
 <div id="ref-gtexconsortiumGTExConsortiumAtlas2020" class="csl-entry">
 
-GTEx Consortium. 2020. “The GTEx Consortium Atlas of Genetic Regulatory
-Effects Across Human Tissues.” *Science* 369 (6509): 1318–30.
+———. 2020. “The GTEx Consortium Atlas of Genetic Regulatory Effects
+Across Human Tissues.” *Science* 369 (6509): 1318–30.
 
 </div>
 

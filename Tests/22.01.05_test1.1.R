@@ -45,13 +45,21 @@ if(TRUE){
                      mc.cores=1,verbose=TRUE) #29.
 }
 
-#Is RNGkind("L'Ecuyer-CMRG") necessary when mc.cores=1? Doesn't seem like it.
+#Is RNGkind("L'Ecuyer-CMRG") necessary when mc.cores=1? No.
 if(FALSE){
+  RNGkind("default")
+
   set.seed(1)
-  results<-parallel::mclapply(1:3,FUN=function(i){
+  result1<-parallel::mclapply(1:3,FUN=function(i){
     return(rnorm(n=1))
   },mc.cores=1)
-  print(results)
+
+  set.seed(1)
+  result2<-parallel::mclapply(1:3,FUN=function(i){
+    return(rnorm(n=1))
+  },mc.cores=1)
+
+  identical(result1,result2) #TRUE is good.
 }
 
 

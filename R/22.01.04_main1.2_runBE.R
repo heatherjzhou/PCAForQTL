@@ -87,7 +87,7 @@ runBE<-function(X,B=20,alpha=0.05,
   PVEs<-importanceTable[2,]
   # Compare PVEs to testStatsPerm.
   # temp<-(testStatsPerm>=PVEs) #temp is calculated as desired.
-  pValues<-rowSums(testStatsPerm>=PVEs)/B #The p-value for the jth PC is calculated as the proportion of permutations where the PVE of the jth PC is greater than or equal to PVE_j.
+  pValues<-(rowSums(testStatsPerm>=PVEs)+1)/(B+1) #The p-value for the jth PC is calculated as, roughly speaking, the proportion of permutations where the PVE of the jth PC is greater than or equal to PVE_j.
 
   for(j in 2:d){ #Enforce monotone increase of the p-values.
     if(pValues[j]<pValues[j-1]){

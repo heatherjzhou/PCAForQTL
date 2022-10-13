@@ -233,9 +233,9 @@ covariatesToUse<-cbind(knownCovariatesFiltered,PCsTop)
 
 ## Citation
 
-To acknowledge this package or this tutorial, please cite our preprint
-(2022). For questions, please email us at <lijy03@g.ucla.edu> or
-<heatherjzhou@ucla.edu>.
+To acknowledge this package or this tutorial, please cite our paper
+(2022): <https://doi.org/10.1186/s13059-022-02761-4>. For questions,
+please email us at <lijy03@g.ucla.edu> or <heatherjzhou@ucla.edu>.
 
 <!-- [-@stegleBayesianFrameworkAccount2010]. -->
 
@@ -343,11 +343,11 @@ Analyses.” *Nature Protocols* 7 (3): 500–507.
 
 </div>
 
-<div id="ref-zhouPCAOutperformsPopular2022" class="csl-entry">
+<div id="ref-zhouPCAOutperformsPopular2022c" class="csl-entry">
 
 Zhou, Heather J., Lei Li, Yumei Li, Wei Li, and Jingyi Jessica Li. 2022.
-“PCA Outperforms Popular Hidden Variable Inference Methods for QTL
-Mapping.” *bioRxiv*, https://doi.org/10.1101/2022.03.09.483661.
+“PCA Outperforms Popular Hidden Variable Inference Methods for Molecular
+QTL Mapping.” *Genome Biology* 23 (1): 210.
 
 </div>
 

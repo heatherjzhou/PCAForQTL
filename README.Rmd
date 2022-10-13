@@ -3,7 +3,7 @@ output: github_document
 title: PCA for hidden variable inference in QTL mapping
 bibliography: Misc/references.bib
 nocite: |
-  @zhouPCAOutperformsPopular2022
+  @zhouPCAOutperformsPopular2022c
   
   @leekCapturingHeterogeneityGene2007,@leekGeneralFrameworkMultiple2008,
   @stegleBayesianFrameworkAccount2010,@stegleUsingProbabilisticEstimation2012
@@ -23,7 +23,7 @@ setwd("~/2020.07.13_PEER/PCAForQTL") #Set the working directory as the directory
 ```
 
 
-We have shown that PCA is faster, better-performing, and much easier to interpret and use than popular hidden variable inference methods for QTL mapping including SVA, PEER, and HCP [-@zhouPCAOutperformsPopular2022]. Here we aim to provide some guidance on **how to use PCA** for hidden variable inference in QTL mapping and in particular **how to choose $K$** (the number of PCs) using the functions provided in this package. This package implements two simple, highly interpretable methods for choosing the number of PCs: an **automatic elbow detection method** (based on distance to the diagonal line) and the **Buja and Eyuboglu (BE) algorithm** [-@bujaRemarksParallelAnalysis1992] (a permutation-based approach). Detailed descriptions of both methods can be found in our paper [-@zhouPCAOutperformsPopular2022].
+We have shown that PCA is faster, better-performing, and much easier to interpret and use than popular hidden variable inference methods for QTL mapping including SVA, PEER, and HCP [-@zhouPCAOutperformsPopular2022c]. Here we aim to provide some guidance on **how to use PCA** for hidden variable inference in QTL mapping and in particular **how to choose $K$** (the number of PCs) using the functions provided in this package. This package implements two simple, highly interpretable methods for choosing the number of PCs: an **automatic elbow detection method** (based on distance to the diagonal line) and the **Buja and Eyuboglu (BE) algorithm** [-@bujaRemarksParallelAnalysis1992] (a permutation-based approach). Detailed descriptions of both methods can be found in our paper [-@zhouPCAOutperformsPopular2022c].
 
 
 ## 1. Installation
@@ -60,7 +60,7 @@ PCs<-prcompResult$x #368*368. The columns are PCs.
 # dim(PCs)
 ```
 
-Note that the approach we use in this tutorial constitutes PCA_direct rather than PCA_resid [-@zhouPCAOutperformsPopular2022]. The two approaches perform similarly in our simulation studies, so we choose PCA_direct because it is simpler. In addition, PCA_direct can better hedge against the possibility that the known covariates are not actually important confounders because in PCA_direct, the known covariates do not affect the calculation of the PCs.
+Note that the approach we use in this tutorial constitutes PCA_direct rather than PCA_resid [-@zhouPCAOutperformsPopular2022c]. The two approaches perform similarly in our simulation studies, so we choose PCA_direct because it is simpler. In addition, PCA_direct can better hedge against the possibility that the known covariates are not actually important confounders because in PCA_direct, the known covariates do not affect the calculation of the PCs.
 
 Optionally, you may inspect the proportion of variance explained by the PCs at this point. We omit this here because we will perform a more thorough analysis in the next section.
 
@@ -159,7 +159,7 @@ covariatesToUse<-cbind(knownCovariatesFiltered,PCsTop)
 
 ## Citation
 
-To acknowledge this package or this tutorial, please cite our preprint [-@zhouPCAOutperformsPopular2022]. For questions, please email us at lijy03@g.ucla.edu or heatherjzhou@ucla.edu.
+To acknowledge this package or this tutorial, please cite our paper [-@zhouPCAOutperformsPopular2022c]: https://doi.org/10.1186/s13059-022-02761-4. For questions, please email us at lijy03@g.ucla.edu or heatherjzhou@ucla.edu.
 
 
 

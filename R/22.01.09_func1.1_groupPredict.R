@@ -1,11 +1,22 @@
+#' Group predict
+#'
+#' Given dataResponse and dataPredictors, each a matrix, this function predicts each variable in dataResponse with all the variables in dataPredictors using a multiple linear regression.
+#'
+#' @param dataResponse The matrix containing the response variables (must be observation by feature).
+#' @param dataPredictors The matrix containing the predictors (must be observation by feature as well). The rows (i.e., observations) in dataResponse and dataPredictors must match.
+#' @param R2Type Either "unadjusted" or "adjusted".
+#'
+#' @return This function returns a vector of unadjusted or adjusted squares, each corresponding to a response variable.
+#'
+#' @references
+#' Heather J. Zhou, Lei Li, Yumei Li, Wei Li, and Jingyi Jessica Li. PCA outperforms popular hidden variable inference methods for molecular QTL mapping. Genome Biology, 23(1):210, 2022.
+#'
+#' @export
 
 
 
 
 
-#Given dataResponse and dataPredictors, each a matrix,
-#predict each variable in dataResponse with all the variables in dataPredictors.
-#Return a vector of R2's.
 groupPredict<-function(dataResponse,dataPredictors,R2Type=c("unadjusted","adjusted")){
   # set.seed(1)
   # n<-100

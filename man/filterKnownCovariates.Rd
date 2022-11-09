@@ -27,5 +27,5 @@ This function returns the filtered known covariates, i.e., the known covariates 
 This function filters out the known covariates that are captured well by the inferred covariates (unadjusted R squared greater than or equal to 0.9 by default). We use unadjusted R squared instead of adjusted R squared because we do not want to penalize for model complexity here.
 }
 \references{
-Preprint.
+Heather J. Zhou, Lei Li, Yumei Li, Wei Li, and Jingyi Jessica Li. PCA outperforms popular hidden variable inference methods for molecular QTL mapping. Genome Biology, 23(1):210, 2022.
 }

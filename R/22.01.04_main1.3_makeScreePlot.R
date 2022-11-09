@@ -13,7 +13,7 @@
 #' @return This function returns the produced scree plot.
 #'
 #' @references
-#' Preprint.
+#' Heather J. Zhou, Lei Li, Yumei Li, Wei Li, and Jingyi Jessica Li. PCA outperforms popular hidden variable inference methods for molecular QTL mapping. Genome Biology, 23(1):210, 2022.
 #'
 #' @import ggplot2
 #' @export

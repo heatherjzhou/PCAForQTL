@@ -36,5 +36,5 @@ This function returns the produced scree plot.
 This function makes a scree plot showing the numbers of PCs chosen via different methods.
 }
 \references{
-Preprint.
+Heather J. Zhou, Lei Li, Yumei Li, Wei Li, and Jingyi Jessica Li. PCA outperforms popular hidden variable inference methods for molecular QTL mapping. Genome Biology, 23(1):210, 2022.
 }

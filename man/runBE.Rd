@@ -33,10 +33,10 @@ This function returns a list consisting of the following items:
 This function implements the BE algorithm, a permutation-based approach for choosing K in PCA. Intuitively, the BE algorithm retains PCs that explain more variance in the data than by random chance and discards those that do not.
 }
 \details{
-The BE algorithm was originally proposed by Buja and Eyuboglu (1992). A detailed description of this method can be found in preprint. For reproducibility, make sure to change the RNG type (necessary unless \code{mc.cores} is 1) and set the seed before using this function (see README file for details).
+The BE algorithm was originally proposed by Buja and Eyuboglu (1992). A detailed description of this method can be found in our 2022 paper. For reproducibility, make sure to change the RNG type (necessary unless \code{mc.cores} is 1) and set the seed before using this function (see README file for details).
 }
 \references{
-Andreas Buja and Nermin Eyuboglu. 1992. “Remarks on Parallel Analysis.” Multivariate Behavioral Research 27 (4): 509–40.
+Andreas Buja and Nermin Eyuboglu. Remarks on parallel analysis. Multivariate Behavioral Research, 27(4):509–540, 1992.
 
-Preprint.
+Heather J. Zhou, Lei Li, Yumei Li, Wei Li, and Jingyi Jessica Li. PCA outperforms popular hidden variable inference methods for molecular QTL mapping. Genome Biology, 23(1):210, 2022.
 }

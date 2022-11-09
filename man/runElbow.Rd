@@ -18,8 +18,8 @@ This function returns the number of PCs selected by maximizing the distance to t
 This function implements an automatic elbow detection method (based on distance to the diagonal line).
 }
 \details{
-A detailed description of this method can be found in preprint.
+A detailed description of this method can be found in our 2022 paper.
 }
 \references{
-Preprint.
+Heather J. Zhou, Lei Li, Yumei Li, Wei Li, and Jingyi Jessica Li. PCA outperforms popular hidden variable inference methods for molecular QTL mapping. Genome Biology, 23(1):210, 2022.
 }

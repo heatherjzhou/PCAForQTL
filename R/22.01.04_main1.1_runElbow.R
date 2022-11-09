@@ -2,7 +2,7 @@
 #'
 #' This function implements an automatic elbow detection method (based on distance to the diagonal line).
 #'
-#' A detailed description of this method can be found in preprint.
+#' A detailed description of this method can be found in our 2022 paper.
 #'
 #' @param X The data matrix for running PCA (must be observation by feature).
 #' @param prcompResult The output from running \code{prcomp()} on \code{X}. Either \code{X} or \code{prcompResult} must be provided. If both are provided, then only \code{prcompResult} will be used. We recommend only providing \code{prcompResult} because it's faster.
@@ -10,7 +10,7 @@
 #' @return This function returns the number of PCs selected by maximizing the distance to the diagonal line.
 #'
 #' @references
-#' Preprint.
+#' Heather J. Zhou, Lei Li, Yumei Li, Wei Li, and Jingyi Jessica Li. PCA outperforms popular hidden variable inference methods for molecular QTL mapping. Genome Biology, 23(1):210, 2022.
 #'
 #' @export
 
@@ -20,7 +20,7 @@
 
 #Given X, the data matrix (must be observation by feature),
 #and/or prcompResult, the output from running prcomp() on X,
-#select the number of PCs by maximizing the distance to the diagonal line (see preprint or below for details).
+#select the number of PCs by maximizing the distance to the diagonal line (see our 2022 paper or below for details).
 #Either X or prcompResult must be provided. If both are provided, then only prcompResult will be used.
 #We recommend only providing prcompResult because it's faster.
 runElbow<-function(X=NULL,

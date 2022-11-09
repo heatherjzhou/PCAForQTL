@@ -10,7 +10,7 @@
 #' @return This function returns the filtered known covariates, i.e., the known covariates that should be kept.
 #'
 #' @references
-#' Preprint.
+#' Heather J. Zhou, Lei Li, Yumei Li, Wei Li, and Jingyi Jessica Li. PCA outperforms popular hidden variable inference methods for molecular QTL mapping. Genome Biology, 23(1):210, 2022.
 #'
 #' @export
 
